@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.env
+.venv
+venv/
+
+# Model checkpoints (large binary files)
+output/checkpoints/*.pth
+output/runs/
+
+# Dataset (never commit raw data)
+data/
+*.h5
+*.nii
+*.nii.gz
+
+# Java / Maven
+java_app/target/
+java_app/.mvn/
+*.class
+*.jar
+*.war
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
