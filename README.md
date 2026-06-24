@@ -1,83 +1,224 @@
-# Brain Tumor Detection & Analysis
+# 🧠 Brain Tumor Detection & Analysis System
 
-An end-to-end medical imaging solution that leverages Deep Learning to segment and detect brain tumors from MRI scans. Developed with a Python-based AI model (2D Attention U-Net), a robust Spring Boot backend, and a MySQL database for storing patient and analysis records.
+An AI-powered medical imaging platform designed to detect and segment brain tumors from MRI scans using Deep Learning techniques. The system combines a **2D Attention U-Net model**, a **Spring Boot REST API**, and a **MySQL database** to provide accurate tumor analysis, patient record management, and scalable deployment.
 
-## 🚀 Key Features
+---
 
-* **Deep Learning Model:** Implements a 2D Attention U-Net architecture for high-accuracy brain tumor segmentation.
-* **Backend API:** Java-based Spring Boot REST API for processing medical images, orchestrating inference from the model, and serving results.
-* **Database Management:** MySQL schemas to efficiently manage patient metadata, scan histories, and prediction results.
-* **Scalable Architecture:** Designed with distinct separations between the deep learning logic and the backend web application server.
+## 🚀 Features
+
+### 🔍 AI-Based Tumor Detection
+
+* Utilizes a **2D Attention U-Net** architecture for precise brain tumor segmentation.
+* Processes MRI scans and highlights tumor regions with high accuracy.
+* Reduces false positives through attention-based feature extraction.
+
+### ⚙️ Backend Services
+
+* Developed using **Java Spring Boot**.
+* RESTful APIs for image upload, prediction requests, and result retrieval.
+* Seamless integration with the Deep Learning inference engine.
+
+### 🗄️ Database Management
+
+* MySQL database for storing:
+
+  * Patient information
+  * MRI scan records
+  * Prediction history
+  * Analysis reports
+
+### 📈 Scalable Architecture
+
+* Modular design separating:
+
+  * AI Model Layer
+  * Backend Service Layer
+  * Database Layer
+* Supports future enhancements and cloud deployment.
+
+---
 
 ## 📂 Project Structure
 
 ```text
 brain_tumor_detection/
-├── java_app/          # Java Spring Boot application (REST API & services)
-├── data_base/         # MySQL schemas, configuration, and migration scripts 
-├── docs/              # Project documentation and architectural charts
-├── dataset.py         # PyTorch dataset loaders & data augmentation scripts
-├── model.py           # 2D Attention U-Net neural network architecture definition
-├── train.py           # Script for training the Deep Learning model
-├── inference.py       # Script to run predictions (inference) on new MRI scans
+├── java_app/          # Spring Boot backend application
+├── data_base/         # MySQL scripts and database configuration
+├── docs/              # Documentation and architecture diagrams
+├── dataset.py         # Dataset loading and preprocessing
+├── model.py           # Attention U-Net architecture
+├── train.py           # Model training script
+├── inference.py       # MRI prediction and segmentation
 └── requirements.txt   # Python dependencies
 ```
 
+---
+
 ## 🛠️ Technology Stack
 
-* **AI/Machine Learning:** Python, PyTorch / TensorFlow (Deep Learning), OpenCV
-* **Model Architecture:** 2D Attention U-Net
-* **Backend:** Java, Spring Boot, Maven/Gradle
-* **Database:** MySQL
-* **Tools:** RESTful APIs, Git
+### Artificial Intelligence & Machine Learning
 
-## ⚙️ Getting Started
+* Python
+* Deep Learning
+* PyTorch / TensorFlow
+* OpenCV
+* NumPy
+
+### Backend Development
+
+* Java
+* Spring Boot
+* Maven / Gradle
+* REST APIs
+
+### Database
+
+* MySQL
+
+### Version Control & Tools
+
+* Git
+* GitHub
+
+---
+
+## ⚙️ Installation & Setup
 
 ### Prerequisites
 
-* **Python 3.8+** (for Deep Learning scripts)
-* **Java Development Kit (JDK) 17+** (for Spring Boot backend)
-* **MySQL Server** (ensure the database is running locally or remotely)
-* **Maven or Gradle** for managing Java dependencies
+* Python 3.8+
+* Java JDK 17+
+* MySQL Server
+* Maven or Gradle
+* Git
 
-### 1. Database Setup
-Navigate to the `data_base/` folder and execute the provided `.sql` schemas in your MySQL server to construct the necessary tables. Update the respective `application.properties` or `application.yml` file in `java_app/` with your database credentials.
+---
 
-### 2. Deep Learning Model (Python)
-It is recommended to run the ML code using a virtual environment:
+### Step 1: Configure Database
 
-```bash
-# Create and activate a virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
+Import the SQL scripts located in the `data_base/` directory into MySQL.
 
-# Install the required packages
-pip install -r requirements.txt
+Update database credentials in:
 
-# To train the model from scratch (assuming dataset is configured)
-python train.py
-
-# To run a standalone test inference
-python inference.py --image_path path/to/sample_mri.jpg
+```properties
+application.properties
 ```
 
-### 3. Spring Boot Backend (Java)
-Open a terminal in the `java_app/` directory and use your build tool to compile and run the backend.
+or
+
+```yaml
+application.yml
+```
+
+inside the `java_app/` folder.
+
+---
+
+### Step 2: Setup Deep Learning Environment
 
 ```bash
-# Using Maven
+# Create virtual environment
+python -m venv venv
+
+# Activate environment
+# Windows
+venv\Scripts\activate
+
+# Linux/Mac
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+#### Train Model
+
+```bash
+python train.py
+```
+
+#### Run Prediction
+
+```bash
+python inference.py --image_path path/to/mri_image.jpg
+```
+
+---
+
+### Step 3: Run Spring Boot Application
+
+```bash
+cd java_app
+
 mvn clean install
 mvn spring-boot:run
-
-# The API should start running on http://localhost:8080 (default)
 ```
 
-## 🧠 Model Pipeline (2D Attention U-Net)
+Backend API will be available at:
 
-The AI engine utilizes an **Attention U-Net**, an evolution of the traditional U-Net model designed specifically for medical image segmentation. This model uses an attention gate structure to suppress irrelevant background regions in MRI scans while highlighting salient features (the tumor), yielding higher accuracy and fewer false positives in medical diagnostics.
+```text
+http://localhost:8080
+```
 
-## 🤝 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+---
+
+## 🧠 Deep Learning Model
+
+The system employs an **Attention U-Net**, an advanced variation of the U-Net architecture specifically designed for medical image segmentation.
+
+### Benefits
+
+* Focuses on relevant tumor regions.
+* Suppresses irrelevant background information.
+* Improves segmentation accuracy.
+* Produces detailed tumor boundary predictions.
+
+### Workflow
+
+```text
+MRI Scan
+   ↓
+Image Preprocessing
+   ↓
+Attention U-Net Model
+   ↓
+Tumor Segmentation
+   ↓
+Prediction Generation
+   ↓
+Storage in MySQL Database
+   ↓
+Result Visualization
+```
+
+---
+
+## 📊 Applications
+
+* Brain Tumor Detection
+* Medical Image Analysis
+* Clinical Decision Support
+* Healthcare Research
+* Diagnostic Assistance Systems
+
+---
+
+## 🔮 Future Enhancements
+
+* Multi-class tumor classification
+* Real-time prediction dashboard
+* Cloud deployment support
+* Patient report generation
+* Integration with hospital management systems
+
+---
+
+## 👥 Contributors
+
+Developed as a collaborative academic project focused on applying Artificial Intelligence and Medical Imaging techniques for healthcare solutions.
+
+---
 
 ## 📄 License
+
 This project is licensed under the MIT License.
